@@ -7,8 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -38,5 +38,11 @@
         @stack('modals')
 
         @livewireScripts
+        <footer class="blog-footer">
+          <p>San Isidro Labrador <a href="#">Siltepec</a> by <a href="#">@jacuba</a>.</p>
+          <p>
+            <a href="#">Back to top</a>
+          </p>
+        </footer>
     </body>
 </html>
