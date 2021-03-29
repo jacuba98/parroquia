@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -40,6 +40,20 @@
                         {{ __('Matrimonio') }}
                     </x-jet-nav-link>
                 </div>
+
+                @if(Auth::user()->rol == 'Admin')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                        {{ __('Usuarios') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.index')">
+                        {{ __('Roles') }}
+                    </x-jet-nav-link>
+                </div>
+                @endif
+
             </div>
 
             <!-- Settings Dropdown -->
@@ -145,6 +159,43 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('bautismo.index') }}" :active="request()->routeIs('bautismo.index')">
+                {{ __('Bautismos') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('comunion.index') }}" :active="request()->routeIs('comunion.index')">
+                {{ __('Comunion') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('confirmacion.index') }}" :active="request()->routeIs('confirmacion.index')">
+                {{ __('Confirmacion') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('matrimonio.index') }}" :active="request()->routeIs('matrimonio.index')">
+                {{ __('Matrimonio') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        @if(Auth::user()->rol == 'Admin')
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.index')">
+                {{ __('Usuarios') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.index')">
+                {{ __('Roles') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -66,7 +66,7 @@ class BautismoController extends Controller
         $bautismo->rc = $request->rc;
 
         $bautismo->save();
-        return redirect()->route('bautismo.index')->with('status_success','Solicitud enviada');
+        return redirect()->route('bautismo.index')->with('status_success','Boleta Creada');
     }
 
     /**
@@ -75,9 +75,9 @@ class BautismoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bautismo $bautismo)
     {
-        //
+        return view('sacramentos.bautismo.show', compact('bautismo'));
     }
 
     /**
@@ -113,8 +113,7 @@ class BautismoController extends Controller
         //dd($bautismo);
         $bautismo->update($request->all());
 
-        return redirect()->route('bautismo.index')
-             ->with('status_success','Boleta actualizado correctamente');
+        return redirect()->route('bautismo.index')->with('status_success','Boleta actualizado correctamente');
     }
 
     /**
@@ -128,7 +127,6 @@ class BautismoController extends Controller
       //$this->authorize('haveaccess','role.destroy');
        $bautismo->delete();
 
-       return redirect()->route('bautismo.index')
-           ->with('status_success','Boleta eliminada!');
+       return redirect()->route('bautismo.index')->with('status_success','Boleta eliminada!');
     }
 }

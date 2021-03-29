@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBautismosTable extends Migration
+class CreateConfirmacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,21 @@ class CreateBautismosTable extends Migration
      */
     public function up()
     {
-        Schema::create('bautismos', function (Blueprint $table) {
+        Schema::create('confirmaciones', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('apePat');
             $table->string('apeMat');
+            $table->string('obispo');
+            $table->string('fechaC');
             $table->string('namePat')->nullable();
             $table->string('nameMat')->nullable();
-            $table->string('lugar');
-            $table->string('fechaN');
-            $table->string('fechaB');
-            $table->string('sacerdote');
             $table->string('padrino')->nullable();
             $table->string('madrina')->nullable();
-            $table->string('rc');
+            $table->string('lugarN');
+            $table->string('fechaN');
+            $table->string('lugarB');
+            $table->string('fechaB');
             $table->timestamps();
         });
     }
@@ -38,6 +39,6 @@ class CreateBautismosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bautismo');
+        Schema::dropIfExists('confirmaciones');
     }
 }

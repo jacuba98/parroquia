@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sacramentos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Confirmacion;
 use Illuminate\Http\Request;
 
 class ConfirmacionController extends Controller
@@ -14,7 +15,8 @@ class ConfirmacionController extends Controller
      */
     public function index()
     {
-        return view('sacramentos.confirmacion.index');
+        $confirmaciones = Confirmacion::orderBy('id','Desc')->paginate(20);
+        return view('sacramentos.confirmacion.index', compact('confirmaciones'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ConfirmacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('sacramentos.confirmacion.create');
     }
 
     /**
@@ -35,7 +37,33 @@ class ConfirmacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+          'name'      => 'required',
+          'apePat'    => 'required',
+          'apeMat'    => 'required',
+          'obispo' => 'required',
+          'fechaC'    => 'required',
+          'lugarB'     => 'required',
+          'fechaB'    => 'required',
+        ]);
+        $confirmacion = new Confirmacion();
+
+        $confirmacion->name = $request->name;
+        $confirmacion->apePat = $request->apePat;
+        $confirmacion->apeMat = $request->apeMat;
+        $confirmacion->obispo = $request->obispo;
+        $confirmacion->fechaC = $request->fechaC;
+        $confirmacion->namePat = $request->namePat;
+        $confirmacion->nameMat = $request->nameMat;
+        $confirmacion->padrino = $request->padrino;
+        $confirmacion->madrina = $request->madrina;
+        $confirmacion->lugarN = $request->lugarN;
+        $confirmacion->fechaN = $request->fechaN;
+        $confirmacion->lugarB = $request->lugarB;
+        $confirmacion->fechaB = $request->fechaB;
+
+        $confirmacion->save();
+        return redirect()->route('confirmacion.index')->with('status_success','Boleta Creada Correctamente');
     }
 
     /**
@@ -44,9 +72,9 @@ class ConfirmacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Confirmacion $confirmacion)
     {
-        //
+        return view('sacramentos.confirmacion.show', compact('confirmacion'));
     }
 
     /**
@@ -55,9 +83,9 @@ class ConfirmacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Confirmacion $confirmacion)
     {
-        //
+        return view('sacramentos.confirmacion.edit', compact('confirmacion'));
     }
 
     /**
@@ -67,9 +95,21 @@ class ConfirmacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Confirmacion $confirmacion)
     {
-        //
+        $validatedData = $request->validate([
+          'name'      => 'required',
+          'apePat'    => 'required',
+          'apeMat'    => 'required',
+          'obispo'    => 'required',
+          'fechaC'    => 'required',
+          'lugarB'    => 'required',
+          'fechaB'    => 'required',
+        ]);
+            //dd($bautismo);
+        $confirmacion->update($request->all());
+
+        return redirect()->route('confirmacion.index')->with('status_success','Boleta actualizado correctamente');
     }
 
     /**
@@ -78,8 +118,10 @@ class ConfirmacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Confirmacion $confirmacion)
     {
-        //
+        $this->authorize('haveaccess','confirmacion.destroy');
+        $confirmacion->delete();
+        return redirect()->route('confirmacion.index')->with('status_success','Boleta eliminada!');
     }
 }
