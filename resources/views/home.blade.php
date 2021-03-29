@@ -5,4 +5,6 @@
         </h2>
     </x-slot>
 
+    <div>Hola Mundo</div>
+
 </x-app-layout>
